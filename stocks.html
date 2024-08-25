@@ -55,6 +55,45 @@ async function printJSON(ticker) {
         ulmainData.appendChild(li);
     }
 
+    let  tableGovernance = document.getElementById("governance");
+    let headerGovernance = tableGovernance.createTHead();
+    let rowGovernance = headerGovernance.insertRow(0);
+    let thHead = []
+    for(let gov of Object.keys(jsonData.governancesheets[0])){
+        thHead.push(`<th>${gov}</th>`)
+    }
+    rowGovernance.insertCell(0).outerHTML = thHead.join('')
+
+    let bodyGovernance = tableGovernance.createTBody();
+    let i = -1;
+    for(let _govData of jsonData.governancesheets){
+        let rowGovernance = bodyGovernance.insertRow(i);
+        let _gov = Object.entries(_govData).map(e=>{
+            return  `<td>${e[1]}</td>`
+        })
+        rowGovernance.insertCell(i).outerHTML = _gov.join('')
+    }
+
+
+    let tableBalance = document.getElementById("balance");
+    let headerBalance = tableBalance.createTHead();
+    let rowBalance = headerBalance.insertRow(0);
+    let thHeadBalance = []
+    for(let bal of Object.keys(jsonData.balancesheets[0])){
+        thHeadBalance.push(`<th>${bal}</th>`)
+    }
+    rowBalance.insertCell(0).outerHTML = thHeadBalance.join('')
+
+    let bodyBalance = tableBalance.createTBody();
+    let _i = -1;
+    for(let _balData of jsonData.balancesheets){
+        let rowbalance = bodyBalance.insertRow(i);
+        let _bal = Object.entries(_balData).map(e=>{
+            return  `<td>${e[1]}</td>`
+        })
+        rowbalance.insertCell(i).outerHTML = _bal.join('')
+    }
+
     let ulinfoData = document.getElementById("infoData");
     for(let info of jsonData.info){
         var li = document.createElement("li");
@@ -127,9 +166,17 @@ async function printJSON(ticker) {
             <h3>Main</h3>
             <ul class="list-group" id="mainData" ></ul>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-4">
             <h3>Information</h3>
             <ul class="list-group" id="infoData" ></ul>
+        </div>
+        <div class="rot mt-5">
+            <h3>Governance</h3>
+            <table class="table" id="governance"></table>
+        </div>
+        <div class="rot mt-5">
+            <h3>Balance</h3>
+            <table class="table" id="balance"></table>
         </div>
         <div class="row mt-4">
             <h3>Valuation</h3>
