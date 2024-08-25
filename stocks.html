@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-582RMB6M');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7131370329602866"
+    crossorigin="anonymous"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Fundamentus para o Diagrada do Cerrado Ações</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <meta name="description" content="Fundamentos é uma ferramenta que automatiza a busca e estudos de ativos com as perguntas realizadas no diagrama do cerrado. Tabela IBOVESPA - Planilha de Ações"/>
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=K2D:300,400,500,700,800" rel="stylesheet">
+
+    <!-- Bootstrap CSS / Color Scheme -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-582RMB6M"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<!--Header Section-->
+<script >
+
+async function printJSON(ticker) {
+    let response = await fetch(`./stocks/${ticker}.json`);
+    let json = await response.json();
+    return json
+}
+(async () => { 
+    var url = new URL(window.location.href);
+    var ticker = url.searchParams.get("ticker");
+    let jsonData = await printJSON(ticker);
+
+    let ulmainData = document.getElementById("mainData");
+    for(let [key, value] of Object.entries(jsonData.main[0])){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        if('links' == key) {
+            let _links = value.map(e=>{
+                return `${e.title} : ${e.link}`
+            })
+            value = _links.join(', ')
+        }
+        li.appendChild(document.createTextNode(`${key} : ${value}`));
+        ulmainData.appendChild(li);
+    }
+
+    let ulinfoData = document.getElementById("infoData");
+    for(let info of jsonData.info){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulinfoData.appendChild(li);
+    }
+
+    let ulvaluation = document.getElementById("valuationData");
+    for(let info of jsonData.valuation){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulvaluation.appendChild(li);
+    }
+
+    let ulgrowth = document.getElementById("growthData");
+    for(let info of jsonData.growth){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulgrowth.appendChild(li);
+    }
+
+    let ulearnings = document.getElementById("earningsData");
+    for(let info of jsonData.earnings){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulearnings.appendChild(li);
+    }
+
+    let ulmarket_capitalization = document.getElementById("market_capitalizationData");
+    for(let info of jsonData.market_capitalization){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulmarket_capitalization.appendChild(li);
+    }
+
+    let ulprofitability = document.getElementById("profitabilityData");
+    for(let info of jsonData.profitability){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulprofitability.appendChild(li);
+    }
+
+    let ulleverage = document.getElementById("leverageData");
+    for(let info of jsonData.leverage){
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.appendChild(document.createTextNode(`${info.title} : ${info.value}`));
+        ulleverage.appendChild(li);
+    }
+ })();
+
+
+</script>
+
+<section class="bg-gradient pt-5 pb-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex flex-row align-items-center justify-content-between">
+                <div class="heading-brand"> <a href="https://sardinha.net/">Fundamentus</a></div>
+                <a href="https://auvp.com.br/" class="btn btn-dark" target="_blank">AUVP</a>
+            </div>
+        </div>
+        <div class="row mt-6">
+            <ul class="list-group" id="mainData" ></ul>
+        </div>
+        <div class="row mt-5">
+            <ul class="list-group" id="infoData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Valuation</h3>
+            <ul class="list-group" id="valuationData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Growth</h3>
+            <ul class="list-group" id="growthData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Earnings</h3>
+            <ul class="list-group" id="earningsData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Market Capitalization</h3>
+            <ul class="list-group" id="market_capitalizationData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Profitability</h3>
+            <ul class="list-group" id="profitabilityData" ></ul>
+        </div>
+        <div class="row mt-4">
+            <h3>Leverage</h3>
+            <ul class="list-group" id="leverageData" ></ul>
+        </div>
+    </div>
+</section>
+
+
+<!--footer-->
+<footer class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="https://auvp.com.br/">AUVP escola de investidores</a></li>
+                    <li class="list-inline-item"><a href="https://comunidade.auvp.com.br/profile/17591-mesaque-silva/">Meu perfil na comunidade</a></li>
+                    <li class="list-inline-item"><a href="https://github.com/mesaque">Meu GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-md-4 mx-auto text-muted text-center small-xl">
+                &copy; 2024 All Rights Reserved
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
