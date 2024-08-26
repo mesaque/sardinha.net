@@ -238,19 +238,19 @@
                     <div id="collapseOneAbout" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                       <div class="accordion-body" id="detailstickers">
                         <script>
-                          $.getJSON('./stocks/', files => {
+                          (async () => {
+                            let response = await fetch('https://api.github.com/repos/mesaque/sardinha.net/contents/stocks');
+                            let files = await response.json();
                             let details = document.getElementById("detailstickers");
                             for(let _link of files){
-                              let ticker = _link.replace('.json', '')
+                              let ticker = _link.name.replace('.json', '')
                               let newlink = document.createElement('a');
                               newlink.setAttribute('href', `https://sardinha.net/stocks.html?ticker=${ticker}`);
                               newlink.setAttribute('class', 'btn');
                               newlink.innerHTML = ticker.toUpperCase()
                               details.appendChild(newlink);
                             }
-                            //let newlink = document.createElement('a');
-
-                        });
+                          })()
                         </script>
                       </div>
                     </div>
