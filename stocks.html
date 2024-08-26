@@ -74,25 +74,27 @@ async function printJSON(ticker) {
         rowGovernance.insertCell(i).outerHTML = _gov.join('')
     }
 
+    if(0 !== jsonData.balancesheets.length){
+        let tableBalance = document.getElementById("balance");
+        let headerBalance = tableBalance.createTHead();
+        let rowBalance = headerBalance.insertRow(0);
+        let thHeadBalance = []
+        for(let bal of Object.keys(jsonData.balancesheets[0])){
+            thHeadBalance.push(`<th>${bal}</th>`)
+        }
+        rowBalance.insertCell(0).outerHTML = thHeadBalance.join('')
 
-    let tableBalance = document.getElementById("balance");
-    let headerBalance = tableBalance.createTHead();
-    let rowBalance = headerBalance.insertRow(0);
-    let thHeadBalance = []
-    for(let bal of Object.keys(jsonData.balancesheets[0])){
-        thHeadBalance.push(`<th>${bal}</th>`)
+        let bodyBalance = tableBalance.createTBody();
+        let _i = -1;
+        for(let _balData of jsonData.balancesheets){
+            let rowbalance = bodyBalance.insertRow(i);
+            let _bal = Object.entries(_balData).map(e=>{
+                return  `<td>${e[1]}</td>`
+            })
+            rowbalance.insertCell(i).outerHTML = _bal.join('')
+        }
     }
-    rowBalance.insertCell(0).outerHTML = thHeadBalance.join('')
 
-    let bodyBalance = tableBalance.createTBody();
-    let _i = -1;
-    for(let _balData of jsonData.balancesheets){
-        let rowbalance = bodyBalance.insertRow(i);
-        let _bal = Object.entries(_balData).map(e=>{
-            return  `<td>${e[1]}</td>`
-        })
-        rowbalance.insertCell(i).outerHTML = _bal.join('')
-    }
 
     let ulinfoData = document.getElementById("infoData");
     for(let info of jsonData.info){
